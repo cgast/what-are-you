@@ -1,0 +1,151 @@
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #1d1c1a;
+  --muted: #6b6862;
+  --border: #e3e0d8;
+  --accent: #3b5bdb;
+  --accent-soft: #e7ecff;
+  --pos: #2f7d4f;
+  --pos-soft: #e3f3e9;
+  --neg: #b4432f;
+  --neg-soft: #fbe9e5;
+  --code-bg: #f1efe9;
+  --radius: 14px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131312;
+    --surface: #1c1c1a;
+    --text: #ecebe7;
+    --muted: #9c998f;
+    --border: #2f2e2a;
+    --accent: #8ea6ff;
+    --accent-soft: #232a45;
+    --pos: #7fd19c;
+    --pos-soft: #1d3326;
+    --neg: #f29a87;
+    --neg-soft: #3a221d;
+    --code-bg: #24241f;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 var(--font);
+}
+a { color: var(--accent); }
+code, pre { font-family: var(--mono); font-size: 0.88em; }
+code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 5px; }
+pre { background: var(--code-bg); padding: 0.8rem 1rem; border-radius: 10px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+pre code { background: none; padding: 0; }
+.muted { color: var(--muted); }
+
+.site-header, main, .site-footer { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+.site-header { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline; justify-content: space-between; padding-top: 1.25rem; padding-bottom: 1rem; }
+.brand { font-weight: 700; font-size: 1.1rem; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+.brand span { color: var(--accent); }
+.site-header nav { display: flex; gap: 1rem; font-size: 0.95rem; }
+.site-header nav a { color: var(--muted); text-decoration: none; }
+.site-header nav a:hover { color: var(--text); }
+.site-footer { color: var(--muted); font-size: 0.85rem; padding-bottom: 2rem; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.25rem 1.4rem;
+  margin-bottom: 1rem;
+}
+.card h2 { font-size: 1.05rem; margin: 1.4rem 0 0.6rem; }
+.card > h2:first-child { margin-top: 0; }
+.notice { background: var(--accent-soft); border-radius: 10px; padding: 0.75rem 1rem; margin: 0 0 1rem; }
+
+/* Verdict */
+.verdict-head { display: flex; gap: 1rem; align-items: flex-start; }
+.verdict-icon { font-size: 3.2rem; line-height: 1; }
+.eyebrow { margin: 0; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.verdict-label { margin: 0.1rem 0 0.35rem; font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.15; letter-spacing: -0.02em; }
+.intent { margin: 0; color: var(--muted); }
+.confidence { display: flex; gap: 0.75rem; align-items: center; margin: 1.1rem 0 0.4rem; font-size: 0.92rem; }
+.confidence meter { flex: 1; max-width: 260px; height: 0.7rem; }
+.alternatives { font-size: 0.92rem; color: var(--muted); margin: 0.3rem 0 0; }
+.alt small { opacity: 0.8; }
+
+.signals { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.signal {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.45rem 0.6rem;
+  border-radius: 9px;
+  font-size: 0.93rem;
+}
+.signal.pos { background: var(--pos-soft); }
+.signal.neg { background: var(--neg-soft); }
+.signal .impact { font-family: var(--mono); font-weight: 700; text-align: right; }
+.signal.pos .impact { color: var(--pos); }
+.signal.neg .impact { color: var(--neg); }
+.signal.neutral .impact { color: var(--muted); }
+.signal .what { font-weight: 600; }
+.signal .group { display: block; font-weight: 400; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.signal .observed { overflow-wrap: anywhere; }
+.more { margin-top: 0.8rem; }
+.more summary { cursor: pointer; color: var(--muted); font-size: 0.92rem; margin-bottom: 0.5rem; }
+@media (max-width: 560px) {
+  .signal { grid-template-columns: 2.4rem minmax(0, 1fr); row-gap: 0.15rem; }
+  .signal .observed { grid-column: 2; }
+}
+
+/* Interaction */
+.declare label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+.declare textarea {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  resize: vertical;
+}
+.declare textarea:focus-visible, .roles button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; margin-top: 0.8rem; }
+.roles button {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  cursor: pointer;
+  text-align: left;
+}
+.roles button:hover { border-color: var(--accent); }
+.roles button.chosen { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
+
+.sensors { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin: 0; }
+.sensors div { background: var(--bg); border-radius: 10px; padding: 0.55rem 0.75rem; }
+.sensors dt { font-size: 0.78rem; color: var(--muted); }
+.sensors dd { margin: 0; font-family: var(--mono); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+
+/* Hidden instruments (traps & beacons). The agent note is visually hidden but present in the text. */
+.agent-note { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.trap, .beacon { display: none; }
+
+/* Prose pages */
+.prose h1 { margin-top: 0; letter-spacing: -0.02em; }
+.techniques dt { font-weight: 600; margin-top: 0.8rem; }
+.techniques dd { margin: 0.15rem 0 0; color: var(--muted); }
+table.stats { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+table.stats th, table.stats td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); }
+table.stats td:not(:first-child), table.stats th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+.reason { font-size: 0.92rem; margin: 0.4rem 0 0; padding-left: 0.75rem; border-left: 3px solid var(--accent); }

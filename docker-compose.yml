@@ -1,0 +1,21 @@
+# Coolify: create a "Docker Compose" resource from this repository and set the domain on the
+# `app` service (port 3000). Coolify's Traefik terminates TLS and forwards to the container.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      # Public URL used in links handed to agents, e.g. https://whatareyou.example.com
+      PUBLIC_URL: ${PUBLIC_URL:-}
+      # Coolify/Traefik = 1 proxy hop. Add one per extra proxy (e.g. Cloudflare in front = 2).
+      TRUST_PROXY_HOPS: ${TRUST_PROXY_HOPS:-1}
+      # Optional; if empty a secret is generated once and stored in the data volume.
+      APP_SECRET: ${APP_SECRET:-}
+      RETENTION_DAYS: ${RETENTION_DAYS:-30}
+    volumes:
+      - what-are-you-data:/data
+
+volumes:
+  what-are-you-data:

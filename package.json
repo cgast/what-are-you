@@ -1,0 +1,30 @@
+{
+  "name": "what-are-you",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --disable-warning=ExperimentalWarning --test",
+    "start": "node --disable-warning=ExperimentalWarning src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgast/what-are-you.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cgast/what-are-you/issues"
+  },
+  "homepage": "https://github.com/cgast/what-are-you#readme",
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^2.1.11",
+    "hono": "^4.13.22",
+    "web-bot-auth": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}
